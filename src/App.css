@@ -14,15 +14,49 @@
     animation: App-logo-spin infinite 20s linear;
   }
 }
+.centered {
+  height: 80vh; /* Magic here */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.partyModel {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+.modalContent {
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+}
+.rcorners1 {
+  border-radius: 25px;
+  background: #73AD21;
+  padding: 20px;
+  width: 200px;
+  height: 150px;
+}
 .partyTitle {
- 
- 
       font-family: "Fjalla One", sans-serif;
       text-align: center;
       font-size: 35px;
       color: rgb(0, 255, 255);
       background-color: rgb(255, 255, 255);
       text-shadow: rgb(238, 112, 255) 2px 2px 2px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 4%;
   
 }
 
