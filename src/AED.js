@@ -1,9 +1,8 @@
-import logo from './logo.svg';
 import './App.css';
 import React,{ useEffect, useState, useRef} from "react";
-import { Map, Marker } from 'pigeon-maps'
-import Box from '@mui/material/Box';
 import Geocode from "react-geocode";
+
+
 function addressToGeo(address) {
     Geocode.fromAddress(address).then(
       (response) => {
@@ -15,31 +14,35 @@ function addressToGeo(address) {
         console.error(error);
       }
     );
-  }
+}
 
-const HostParty = ({addMarker}) => {
+const AED = ({addMarker}) => {
+  const [latitude, setLatitude] = useState(undefined);
+  const [longitude, setLongitude] = useState(undefined);
     const [openPartyModel, setOpenPartyModel] = useState(false);
     let lng;
     let lat;
     function handleLng(event) {
-        lng = parseFloat(event.target.value);
+        setLongitude(parseFloat(event.target.value));
       }
     function handleLat(event) {
-      lat = parseFloat(event.target.value);
+      setLatitude(parseFloat(event.target.value));
     }
     function setOpen(){
         setOpenPartyModel(true);
     }
+    function setClosed(){
+      setOpenPartyModel(false);
+    }
     function submit(){
-        //const coords = addressToGeo(textInput);
-        //if(lng!==undefined&&lat!==undefined){}
-        addMarker(lat,lng)
+        addMarker(latitude,longitude)
+        setClosed();
     }
     return(
         
         <div>
             
-                <button className='partyTitle' onClick={setOpen}>Host a party</button>
+                <button className='buttonText' onClick={setOpen}>Add A.E.D.</button>
            
             {openPartyModel && (
                 <div className='partyModel'>
@@ -47,8 +50,13 @@ const HostParty = ({addMarker}) => {
                        <span> 
                         <textarea onChange={handleLat} placeholder="Enter Latitude"></textarea>
                         <textarea onChange={handleLng} placeholder="Enter Longitude"></textarea>
-                        <button onClick={submit}>Enter</button>
+                        
                         </span>
+                        <span>
+                        <button className='buttonText' onClick={submit}>Enter</button>
+                        <button className='buttonText' onClick={setClosed}>Cancel</button>
+                        </span>
+                       
                    </div>
                 </div>
             )}
@@ -57,5 +65,5 @@ const HostParty = ({addMarker}) => {
     );
 };
 
-export default HostParty;
+export default AED;
 
