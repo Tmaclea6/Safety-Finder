@@ -1,5 +1,5 @@
 import './App.css';
-import React,{ useEffect, useState, useRef} from "react";
+import React,{useState} from "react";
 import Geocode from "react-geocode";
 
 
