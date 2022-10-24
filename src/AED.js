@@ -17,6 +17,7 @@ function addressToGeo(address) {
 }
 
 const AED = ({addMarker}) => {
+  const [type, setType] = useState("AED");
   const [latitude, setLatitude] = useState(undefined);
   const [longitude, setLongitude] = useState(undefined);
     const [openPartyModel, setOpenPartyModel] = useState(false);
@@ -38,6 +39,11 @@ const AED = ({addMarker}) => {
         addMarker(latitude,longitude)
         setClosed();
     }
+    function onTypeChanged(e){
+      const val = e.target.value;
+      setType(val)
+      console.log(val);
+    }
     return(
         
         <div>
@@ -47,6 +53,17 @@ const AED = ({addMarker}) => {
             {openPartyModel && (
                 <div className='partyModel'>
                    <div className='modelContent'>
+                      <div onChange={onTypeChanged}>
+
+                        <input type="radio" value="AED" name="types" /> AED
+
+                        <input type="radio" value="Fire_Extinguisher" name="types" /> Fire Extinguisher
+
+                        <input type="radio" value="First_Aid_Kit" name="types" /> First Aid Kit
+
+                        <input type="radio" value="Eye_Wash_Station" name="types" /> Eye Wash
+
+                      </div>
                        <span> 
                         <textarea onChange={handleLat} placeholder="Enter Latitude"></textarea>
                         <textarea onChange={handleLng} placeholder="Enter Longitude"></textarea>
