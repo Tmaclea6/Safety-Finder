@@ -1,7 +1,21 @@
 # Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Important
 
+Before cloning this project make sure to fork it in the top right corner then clone your fork.
+
+Ensure node.js is installed on your computer
+
+one you are forked you can clone your project then in the treminal run: 
+git remote add team https://github.com/Tmaclea6/Safety-Finder.git
+
+before a push make sure to run: git pull --rebase team main
+
+once you have your project cloned and installed run: npm i
+
+this will install all the dependencies, you can then run npm start to see the test project
+
+push all your code to a unmique branch on your origin fork and not to the team main
 ## Available Scripts
 
 In the project directory, you can run:

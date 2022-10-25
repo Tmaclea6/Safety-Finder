@@ -125,6 +125,14 @@ function App() {
        {/* </div> </Box> */}
       </div>
       <button onClick={locationSnapshot}>location snapshot</button>
+      <button
+            href={`data:text/json;charset=utf-8,${encodeURIComponent(
+              JSON.stringify(storagedata.location)
+            )}`}
+            download="Loactions.json"
+          >
+            {`Download Json`}
+          </button>
       </Stack>
     </div>
   )
