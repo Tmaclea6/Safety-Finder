@@ -63,7 +63,12 @@ function App() {
   function locationSnapshot(){
     const snapshot = userLocation;
     addMarker(snapshot.x, snapshot.y);
-    storagedata.location.data.push(markerLocations.data);
+    storagedata.location.data.push([snapshot.x,snapshot.y]);
+    localStorage.setItem("storagedata", JSON.stringify(storagedata))
+    console.log("StorgeData: ",storagedata);
+  }
+  function clear(){
+    storagedata = {location: {data:null}}
     localStorage.setItem("storagedata", JSON.stringify(storagedata))
   }
   function countArray(myArr) {
@@ -134,7 +139,9 @@ function App() {
             {`Download Json`}
           </button>
       </Stack>
+      <button onClick={clear}>Clear Data</button>
     </div>
+
   )
 }
 export default App;
