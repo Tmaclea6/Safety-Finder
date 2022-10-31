@@ -82,6 +82,16 @@ function App() {
     }
     return objectsLen;
   }
+  const exportData = () => {
+    const jsonString = `data:text/json;chatset=utf-8,${encodeURIComponent(
+      JSON.stringify(storagedata)
+    )}`;
+    const link = document.createElement("a");
+    link.href = jsonString;
+    link.download = "data.json";
+
+    link.click();
+  };
   function addMarker(latin, lngin) {
      let hold = markerLocations;
      hold.data[hold.data.length] = [latin, lngin] ;
@@ -131,12 +141,9 @@ function App() {
       </div>
       <button onClick={locationSnapshot}>location snapshot</button>
       <button
-            href={`data:text/json;charset=utf-8,${encodeURIComponent(
-              JSON.stringify(storagedata.location)
-            )}`}
-            download="Loactions.json"
+            onClick={exportData}
           >
-            {`Download Json`}
+            Download Json
           </button>
       </Stack>
       <button onClick={clear}>Clear Data</button>
