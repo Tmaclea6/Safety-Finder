@@ -48,7 +48,7 @@ const AED = ({addMarker}) => {
         
         <div>
             
-                <button className='buttonText' onClick={setOpen}>Add A.E.D.</button>
+                <button className='buttonText' onClick={setOpen}>Add Safety Equipment</button>
            
             {openPartyModel && (
                 <div className='partyModel'>
