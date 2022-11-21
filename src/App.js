@@ -11,12 +11,12 @@ function App() {
   const [center, setCenter] = useState([45.92698182886522, -66.62735907832183]);
   const [zoom, setZoom] = useState(11);
   const [hue, setHue] = useState(0);
-  const [markers, setMarkers] = useState(1);
+  const [markers, setMarkers] = useState(0);
   const [userLocation, setUserLocation] = useState({x:undefined,y:undefined});
   const radiusInM = 50 * 1000;
   const [markerLocations, setMarkerLocations] = useState(
     {
-      data:[[45.92698182886522, -66.62735907832183],]
+      data:[]
     }
   )
   var storagedata;
@@ -27,21 +27,8 @@ function App() {
     {
      
       storagedata={
-        location: markerLocations,
+       'data':{}
       }
-    }
-    if(first)
-    {
-      console.log("firstIF");
-      const sd = storagedata.location;
-      console.log(sd);
-      if(sd != undefined){
-        console.log(sd)
-      setMarkerLocations(sd);
-     
-      setMarkers(countArray(sd.data));
-      }
-      first = false;
     }
   }
   catch(error){
@@ -53,8 +40,8 @@ function App() {
   function success(pos) {
     const crd = pos.coords;
      setUserLocation({x: crd.latitude, y: crd.longitude});
-     storagedata.markerLocations = markerLocations;
-     localStorage.setItem("storagedata", JSON.stringify(storagedata))
+     //storagedata.markerLocations = markerLocations;
+    // localStorage.setItem("storagedata", JSON.stringify(storagedata))
      //console.log("location",crd.latitude,crd.longitude)
   }
   navigator.geolocation.getCurrentPosition(success);
@@ -68,7 +55,11 @@ function App() {
     console.log("StorgeData: ",storagedata);
   }
   function clear(){
-    storagedata = {location: {data:null}}
+    setMarkers(0);
+    setMarkerLocations({
+      data:[]
+    });
+    storagedata = {'data':{}};
     localStorage.setItem("storagedata", JSON.stringify(storagedata))
   }
   function countArray(myArr) {
@@ -92,12 +83,18 @@ function App() {
 
     link.click();
   };
-  function addMarker(latin, lngin) {
+  function addMarker(latin, lngin, type, description) {
      let hold = markerLocations;
      hold.data[hold.data.length] = [latin, lngin] ;
      setMarkerLocations(hold);
      setMarkers(markers+1);
-    console.log(markerLocations.data);
+     console.log(storagedata.data);
+     if(storagedata.data[type]===undefined){
+      storagedata.data[type] = [];
+     }
+     storagedata.data[type].push({'coords':[latin,lngin],'description': description});
+     localStorage.setItem("storagedata", JSON.stringify(storagedata))
+    console.log(storagedata);
   }
   const color = `hsl(${hue % 360}deg 39% 70%)`;
   return (
@@ -106,7 +103,7 @@ function App() {
       <span className="partyTitle">Find Saftey Equipment In Your Area</span>
       <div className ='centered'>
       <header></header>
-      <AED addMarker={addMarker}></AED>
+      <AED addMarker={addMarker} userLocation={userLocation}></AED>
       
       {/* <Box className="rcorners1"
         sx={{
@@ -126,12 +123,7 @@ function App() {
           setZoom(zoom) 
         }} 
       >
-          <Marker 
-          width={50}
-          anchor={[45.92698182886522, -66.62735907832183]} 
-          color="blue"
-          onClick={() => setHue(hue + 20)} 
-        />
+    
          {[...Array(markers).keys()].map((markers, i) => {
       return <Marker key={i} width={50} anchor={markerLocations.data[i]} color={color} 
       onClick={() => setHue(hue + 20)} />;
@@ -139,7 +131,7 @@ function App() {
         </Map>
        {/* </div> </Box> */}
       </div>
-      <button onClick={locationSnapshot}>location snapshot</button>
+      {/* <button onClick={locationSnapshot}>location snapshot</button> */}
       <button
             onClick={exportData}
           >

@@ -18,6 +18,10 @@
   justify-content: center;
   align-items: center;
 }
+.errorLabel {
+  color: red;
+  background-color: white;
+}
 .partyModel {
   margin-top: 10%;
   margin-left: 25%;
@@ -67,10 +71,6 @@
       justify-content: center;
       align-items: center;
       
-}
-
-.App-header {
-
 }
 
 .App-link {
