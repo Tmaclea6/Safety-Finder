@@ -82,6 +82,7 @@ const AED = ({addMarker}) => {
                         <input type="radio" value="AED" name="types" /> AED
 
                         <input type="radio" value="Fire_Extinguisher" name="types" /> Fire Extinguisher
+                        <br/>
 
                         <input type="radio" value="First_Aid_Kit" name="types" /> First Aid Kit
 

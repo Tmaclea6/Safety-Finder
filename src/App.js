@@ -103,7 +103,7 @@ function App() {
       <span className="partyTitle">Find Saftey Equipment In Your Area</span>
       <div className ='centered'>
       <header></header>
-      <AED addMarker={addMarker} userLocation={userLocation}></AED>
+  
       
       {/* <Box className="rcorners1"
         sx={{
@@ -113,8 +113,8 @@ function App() {
         }}
       > */}
       <Map 
-        height="50%"
-        width="50%"
+        height="80%"
+        width="90%"
         className="rcorners1"
         center={center} 
         zoom={zoom} 
@@ -131,12 +131,16 @@ function App() {
         </Map>
        {/* </div> </Box> */}
       </div>
+      <br/>
       {/* <button onClick={locationSnapshot}>location snapshot</button> */}
+      <AED addMarker={addMarker} userLocation={userLocation}></AED>
+      <br/>
       <button
             onClick={exportData}
           >
             Download Json
           </button>
+          <br/>
       </Stack>
       <button onClick={clear}>Clear Data</button>
     </div>
