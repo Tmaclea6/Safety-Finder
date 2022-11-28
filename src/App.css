@@ -13,7 +13,7 @@
   }
 }
 .centered {
-  height: 80vh; /* Magic here */
+  height: 60vh; /* Magic here */
   display: flex;
   justify-content: center;
   align-items: center;

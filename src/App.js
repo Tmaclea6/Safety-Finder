@@ -131,14 +131,16 @@ function App() {
         </Map>
        {/* </div> </Box> */}
       </div>
+      <br/>
       {/* <button onClick={locationSnapshot}>location snapshot</button> */}
       <AED addMarker={addMarker} userLocation={userLocation}></AED>
-
+      <br/>
       <button
             onClick={exportData}
           >
             Download Json
           </button>
+          <br/>
       </Stack>
       <button onClick={clear}>Clear Data</button>
     </div>
