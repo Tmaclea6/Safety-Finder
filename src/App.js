@@ -100,7 +100,7 @@ function App() {
   return (
     <div> 
       <Stack>
-      <span className="partyTitle">Find Saftey Equipment In Your Area</span>
+      <span className="partyTitle">Find Safety Equipment In Your Area</span>
       <div className ='centered'>
       <header></header>
   
@@ -113,8 +113,6 @@ function App() {
         }}
       > */}
       <Map 
-        height="80%"
-        width="90%"
         className="rcorners1"
         center={center} 
         zoom={zoom} 
