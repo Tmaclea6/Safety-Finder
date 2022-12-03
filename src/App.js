@@ -4,6 +4,7 @@ import React,{useState} from "react";
 import { Map, Marker } from 'pigeon-maps'
 import AED from './AED';
 import { Stack } from '@mui/material';
+import safetyDataJOSN from './safetyData.json';
 
 var first = true;
 
@@ -80,7 +81,6 @@ function App() {
     const link = document.createElement("a");
     link.href = jsonString;
     link.download = "data.json";
-
     link.click();
   };
   function addMarker(latin, lngin, type, description) {
@@ -96,6 +96,11 @@ function App() {
      localStorage.setItem("storagedata", JSON.stringify(storagedata))
     console.log(storagedata);
   }
+
+  function loadJSON(){
+      //console.log(safetyDataJOSN)
+  }
+
   const color = `hsl(${hue % 360}deg 39% 70%)`;
   return (
     <div> 
