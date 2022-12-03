@@ -8,8 +8,8 @@ import { Stack } from '@mui/material';
 var first = true;
 
 function App() {
-  const [center, setCenter] = useState([45.92698182886522, -66.62735907832183]);
-  const [zoom, setZoom] = useState(11);
+  const [center, setCenter] = useState([45.9470, -66.6430]);
+  const [zoom, setZoom] = useState(16);//16 or 17
   const [hue, setHue] = useState(0);
   const [markers, setMarkers] = useState(0);
   const [userLocation, setUserLocation] = useState({x:undefined,y:undefined});
