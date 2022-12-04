@@ -6,6 +6,7 @@ import AED from './AED';
 import { Stack } from '@mui/material';
 import safetyDataJOSN from './safetyData.json';
 import {type} from "@testing-library/user-event/dist/type";
+import {get} from "leaflet/src/dom/DomUtil";
 
 var first = true;
 
@@ -16,11 +17,32 @@ function App() {
   const [markers, setMarkers] = useState(0);
   const [userLocation, setUserLocation] = useState({x:undefined,y:undefined});
   const radiusInM = 50 * 1000;
+  const [firstRun, setFirstRun ] = useState(true);
+  const [collectedData, setCollectedData] = useState({});
   const [markerLocations, setMarkerLocations] = useState(
     {
       data:[]
     }
   )
+
+      if (firstRun) {
+          loadJSON();
+          setFirstRun(false);
+      }
+
+    function getDataType(typeIn, gatheredDataIn){
+        console.log("gatheredDataIn",gatheredDataIn);
+        console.log("Object.keys(gatheredDataIn).length",Object.keys(gatheredDataIn).length);
+        let coords = {data:[]};
+        console.log("gatheredDataIn", gatheredDataIn[typeIn]);
+        const workingData = gatheredDataIn[typeIn];
+        workingData.forEach(function (x){coords.data.push(x.coords)});
+        console.log("coords", coords);
+        setMarkers(coords.data.length);
+        setMarkerLocations(coords);
+        return gatheredDataIn;
+    }
+
   var storagedata;
  try{
     storagedata = JSON.parse(localStorage.getItem('storagedata'));
@@ -86,12 +108,6 @@ function App() {
     //loadJSON(); //for testing
   };
   function addMarker(latin, lngin, type, description) {
-      console.log( latin)
-      console.log( lngin)
-      console.log( type)
-      console.log( description)
-
-
       let hold = markerLocations;
      hold.data[hold.data.length] = [latin, lngin] ;
      setMarkerLocations(hold);
@@ -102,24 +118,21 @@ function App() {
      }
      storagedata.data[type].push({'coords':[latin,lngin],'description': description});
      localStorage.setItem("storagedata", JSON.stringify(storagedata))
-    console.log(storagedata);
+    //console.log(storagedata);
   }
 
   function loadJSON(){
       let safetyData;
-      safetyData = JSON.stringify(safetyDataJOSN)
-      safetyData = JSON.parse(safetyData)
-      console.log(safetyData)
-      //console.log(typeof safetyData)
-      //console.log(safetyData[0].description)
-      //addMarker(45.947, -66.64,"type" , "description")
-      //latin, lngin, type, description
+      safetyData = JSON.stringify(safetyDataJOSN);
+      safetyData = JSON.parse(safetyData);
+      console.log("safetyData",safetyData);
+      setCollectedData(safetyData.data);
+      getDataType("Fire_Extinguisher", safetyData.data);
   }
-
 
   const color = `hsl(${hue % 360}deg 39% 70%)`;
   return (
-    <div> 
+    <div>
       <Stack>
               <h1 className="partyTitle">Find Safety Equipment In Your Area</h1>
       <div className ='centered'>
@@ -142,9 +155,9 @@ function App() {
           setZoom(zoom) 
         }} 
       >
-    
+
          {[...Array(markers).keys()].map((markers, i) => {
-      return <Marker key={i} width={50} anchor={markerLocations.data[i]} color={color} 
+      return <Marker key={i} width={50} anchor={markerLocations.data[i]} color={color}
       onClick={() => setHue(hue + 20)} />;
     })}
         </Map>
@@ -152,16 +165,9 @@ function App() {
       </div>
       <br/>
       {/* <button onClick={locationSnapshot}>location snapshot</button> */}
-      <AED addMarker={addMarker} userLocation={userLocation}></AED>
       <br/>
-      <button
-            onClick={exportData}
-          >
-            Download Json
-          </button>
           <br/>
       </Stack>
-      <button onClick={clear}>Clear Data</button>
     </div>
 
   )
