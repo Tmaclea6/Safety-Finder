@@ -11,7 +11,7 @@ import {get} from "leaflet/src/dom/DomUtil";
 var first = true;
 
 function App() {
-  const [center, setCenter] = useState([45.9470, -66.6430]);
+  const [center, setCenter] = useState([45.9470, -66.6402]);
   const [zoom, setZoom] = useState(16);//16 or 17
   const [hue, setHue] = useState(0);
   const [markers, setMarkers] = useState(0);
@@ -69,6 +69,10 @@ function App() {
      //console.log("location",crd.latitude,crd.longitude)
   }
   navigator.geolocation.getCurrentPosition(success);
+  function onTypeChanged(e){
+    const val = e.target.value;
+   getDataType(val, collectedData);
+  }
 
   
   function locationSnapshot(){
@@ -133,12 +137,13 @@ function App() {
   const color = `hsl(${hue % 360}deg 39% 70%)`;
   return (
     <div>
-      <Stack>
+      
               <h1 className="partyTitle">Find Safety Equipment In Your Area</h1>
       <div className ='centered'>
       <header></header>
   
-      
+
+
       {/* <Box className="rcorners1"
         sx={{
           width: "50%",
@@ -161,13 +166,26 @@ function App() {
       onClick={() => setHue(hue + 20)} />;
     })}
         </Map>
+      
        {/* </div> </Box> */}
       </div>
       <br/>
+      <div onChange={onTypeChanged}>
+
+<input type="radio" value="AED" name="types" /> AED
+
+<input type="radio" value="Fire_Extinguisher" name="types" /> Fire Extinguisher
+<br/>
+
+<input type="radio" value="First_Aid_Kit" name="types" /> First Aid Kit
+
+<input type="radio" value="Eye_Wash_Station" name="types" /> Eye Wash
+
+</div>
       {/* <button onClick={locationSnapshot}>location snapshot</button> */}
       <br/>
           <br/>
-      </Stack>
+      
     </div>
 
   )
