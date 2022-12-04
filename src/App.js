@@ -5,6 +5,7 @@ import { Map, Marker } from 'pigeon-maps'
 import AED from './AED';
 import { Stack } from '@mui/material';
 import safetyDataJOSN from './safetyData.json';
+import {type} from "@testing-library/user-event/dist/type";
 
 var first = true;
 
@@ -85,7 +86,13 @@ function App() {
     //loadJSON(); //for testing
   };
   function addMarker(latin, lngin, type, description) {
-     let hold = markerLocations;
+      console.log( latin)
+      console.log( lngin)
+      console.log( type)
+      console.log( description)
+
+
+      let hold = markerLocations;
      hold.data[hold.data.length] = [latin, lngin] ;
      setMarkerLocations(hold);
      setMarkers(markers+1);
@@ -103,17 +110,12 @@ function App() {
       safetyData = JSON.stringify(safetyDataJOSN)
       safetyData = JSON.parse(safetyData)
       console.log(safetyData)
-      console.log(typeof safetyData)
+      //console.log(typeof safetyData)
+      //console.log(safetyData[0].description)
+      //addMarker(45.947, -66.64,"type" , "description")
+      //latin, lngin, type, description
   }
 
-    function clear(){
-        setMarkers(0);
-        setMarkerLocations({
-            data:[]
-        });
-        storagedata = {'data':{}};
-        localStorage.setItem("storagedata", JSON.stringify(storagedata))
-    }
 
   const color = `hsl(${hue % 360}deg 39% 70%)`;
   return (
