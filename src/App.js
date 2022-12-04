@@ -105,7 +105,7 @@ function App() {
   return (
     <div> 
       <Stack>
-      <span className="partyTitle">Find Safety Equipment In Your Area</span>
+              <h1 className="partyTitle">Find Safety Equipment In Your Area</h1>
       <div className ='centered'>
       <header></header>
   
