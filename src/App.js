@@ -82,6 +82,7 @@ function App() {
     link.href = jsonString;
     link.download = "data.json";
     link.click();
+    //loadJSON(); //for testing
   };
   function addMarker(latin, lngin, type, description) {
      let hold = markerLocations;
@@ -98,8 +99,21 @@ function App() {
   }
 
   function loadJSON(){
-      //console.log(safetyDataJOSN)
+      let safetyData;
+      safetyData = JSON.stringify(safetyDataJOSN)
+      safetyData = JSON.parse(safetyData)
+      console.log(safetyData)
+      console.log(typeof safetyData)
   }
+
+    function clear(){
+        setMarkers(0);
+        setMarkerLocations({
+            data:[]
+        });
+        storagedata = {'data':{}};
+        localStorage.setItem("storagedata", JSON.stringify(storagedata))
+    }
 
   const color = `hsl(${hue % 360}deg 39% 70%)`;
   return (
