@@ -139,9 +139,26 @@ function App() {
     <div>
       
               <h1 className="partyTitle">Find Safety Equipment In Your Area</h1>
+
+        <div onChange={onTypeChanged}>
+
+        <div className ='radios'>
+            <input type="radio" value="AED" name="types" /> AED
+            <input type="radio" value="Fire_Extinguisher" name="types" /> Fire Extinguisher
+
+            <input type="radio" value="First_Aid_Kit" name="types" /> First Aid Kit
+
+            <input type="radio" value="Eye_Wash_Station" name="types" /> Eye Wash
+
+        </div>
+        </div>
+
+
+
+
       <div className ='centered'>
       <header></header>
-  
+
 
 
       {/* <Box className="rcorners1"
@@ -172,14 +189,9 @@ function App() {
       <br/>
       <div onChange={onTypeChanged}>
 
-<input type="radio" value="AED" name="types" /> AED
 
-<input type="radio" value="Fire_Extinguisher" name="types" /> Fire Extinguisher
 <br/>
 
-<input type="radio" value="First_Aid_Kit" name="types" /> First Aid Kit
-
-<input type="radio" value="Eye_Wash_Station" name="types" /> Eye Wash
 
 </div>
       {/* <button onClick={locationSnapshot}>location snapshot</button> */}
